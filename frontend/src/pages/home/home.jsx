@@ -1,11 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './home.module.css'
+import { AiOutlineSend } from "react-icons/ai"
+import { createChatRoute } from '../../utils/APIRoutes'
 
 const HomePage = () => {
+  const [inputMessage, setInputMessage] = useState('')
+
+  const sendMessageHandler = (e) => {
+    e.preventDefault()
+    console.log(inputMessage)
+    setInputMessage('')
+  }
+
+  const createChatHandler = () => {
+    const data = {
+      'chat_title': 'New Chat',
+    }
+    const options = {}
+    axios.post(createChatRoute, data, options)
+  }
+
   return (
     <div className={styles.container}>
         <aside className={styles.sidemenu}>
-          <div className={styles.side_menu_button}>
+          <div className={styles.side_menu_button} onClick={createChatHandler}>
             <span>+</span>
             New Chat
           </div>
@@ -39,10 +57,17 @@ const HomePage = () => {
 
           </div>
 
-
-          <div className={styles.chat_input_holder}>
-            <input className={styles.chat_input_textarea}></input>
-          </div>
+          <form method='POST' onSubmit={sendMessageHandler}>
+            <div className={styles.chat_input_holder}>
+              <div className={styles.chat_input_wrapper}>
+                <input className={styles.chat_input_textarea} onChange={e => setInputMessage(e.target.value)} value={inputMessage}/>
+                <button className={styles.chat_input_button}>
+                  <AiOutlineSend size={25}/>
+                </button>
+              </div>
+            </div>
+          </form>
+          
         </section>
     </div>
   )
