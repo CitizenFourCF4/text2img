@@ -17,11 +17,15 @@ const RegisterPage = () => {
   const submitHandler = (event) => {
       const form = event.currentTarget;
       if (form.checkValidity() === false) {
-          event.preventDefault();
           event.stopPropagation();
       }
+      event.preventDefault();
       setIsValidated(true);
-      console.log(formData)
+      axios.post(registerRoute, {
+        username: formData.username,
+        password: formData.password,
+        email: formData.email,
+      })
   };
   const changeHandler = (event) => {
       const { name, value } = event.target;
@@ -36,7 +40,7 @@ const RegisterPage = () => {
       <div className={styles.layout__box}>
         <div className={styles.layout__body}>
           <h2 className={styles.auth__tagline}>Регистрация</h2>
-          <Form noValidate isValidated={isValidated} onSubmit={submitHandler}>
+          <Form noValidate isValidated={isValidated}>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
               <Form.Control 
@@ -102,7 +106,7 @@ const RegisterPage = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <div style={{height:'55px', marginTop:"60px"}}>
-              <button type="submit" className={styles.submitButton} onClick={(e) => submitHandler(e)}>
+              <button type="submit" className={styles.submitButton} onClick={submitHandler}>
                 Зарегистрироваться
               </button>
             </div>

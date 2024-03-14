@@ -14,6 +14,7 @@ const AuthProvider = ({children}) => {
   
     let loginUser = async(e) => {
       e.preventDefault()
+      console.log(e.target.username.value)
       let response = await fetch (tokenRoute, {
         method: 'POST',
         headers: {
