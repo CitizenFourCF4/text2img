@@ -21,3 +21,4 @@ jobs:
       - run: |
             sudo chmod +x .github/workflows/update_notifier.sh
             .github/workflows/update_notifier.sh BOT_API_KEY=${{ secrets.BOT_API_KEY }} CHAT_ID=${{ secrets.CHAT_ID }} PR_TITLE="${{ steps.PR.outputs.pr_title }}" REPOSITORY_NAME="${{fromJSON(steps.PR.outputs.pr).head.repo.full_name}}" DETAILS="${{ steps.PR.outputs.pr_body}}" DEVELOPER_LOGIN="${{ fromJSON(steps.PR.outputs.pr).user.login}}"
+
