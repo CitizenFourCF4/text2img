@@ -46,24 +46,26 @@ const ChatContainer = ({selectedChat}) => {
 
   return (
     <section className={styles.chatbox}>
-      <div className={styles.chat_log}>
-      {messages && messages.map((msg, index) => (
-        <div className={styles.chat_message} key={index} author={msg.author}>
-          <div className={styles.chat_message_center}>
-            <div className={styles.avatar} author={msg.author}>
+      <div className={styles.chat_messages_holder}>
+        <div className={styles.chat_messages_wrapper}>
+          {messages && messages.map((msg, index) => (
+            <div className={styles.message_wrapper} key={index} author={msg.author}>
+              <div className={styles.avatar} author={msg.author} />
+              <div className={styles.text_wrapper}>
+                <div className={styles.author}>{msg.author === 'chat' ? msg.author : 'You'}</div>
+                <div className={styles.message}>
+                  {msg.message}
+                </div>
+              </div>  
             </div>
-            <div className={styles.message}>
-              {msg.message}
-            </div>
-          </div>
+          ))}
         </div>
-            ))}
       </div>
 
           <form method='POST' onSubmit={sendMessageHandler}>
             <div className={styles.chat_input_holder}>
               <div className={styles.chat_input_wrapper}>
-                <input cols="1" className={styles.chat_input_textarea} onChange={e => setInputMessage(e.target.value)} value={inputMessage}/>
+                <input placeholder='Type message...' className={styles.chat_input_textarea} onChange={e => setInputMessage(e.target.value)} value={inputMessage}/>
                 <button className={styles.chat_input_button}>
                   <AiOutlineSend size={25}/>
                 </button>

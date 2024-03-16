@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react'
-import styles from './sidebar.module.css'
 import { useNavigate } from "react-router-dom"
 import AuthContext from '../../context/AuthContext'
 import axios from 'axios'
 import { getChatsRoute, createChatRoute } from '../../utils/APIRoutes'
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import styles from './sidebar.module.css'
 
 const Sidebar = ({setSelectedChat}) => {
 
@@ -33,6 +35,7 @@ const Sidebar = ({setSelectedChat}) => {
 
     const changeCurrentChat = (chat_id) => {
         setSelectedChat(chat_id)
+        setCurrentSelected(chat_id)
     }
 
 
@@ -54,13 +57,22 @@ const Sidebar = ({setSelectedChat}) => {
             <span>+</span>
             New Chat
         </div>
-        {chats && chats.map((chat, index) => (
-            <div key={index} onClick={() => changeCurrentChat(chat.id)}>
-                {chat.title}
-            </div>
-            ))}
-        <div>
-        {user.username}
+        <div className={styles.chat_list}>
+          <ul className={styles.sidebar_ul}>
+            {chats && chats.map((chat, index) => (
+              <li className={styles.sidebar_li} key={index} onClick={() => changeCurrentChat(chat.id)} active={currentSelected ===chat.id ? 'active' : ''}>
+                <div className={styles.title}>
+                  {chat.title}
+                </div>
+                  
+              </li>
+              ))} 
+          </ul>
+        </div>
+
+        <div className={styles.userInfo}>
+          <div className={styles.avatar}>{user.username[0]}</div>
+          <span className={styles.userInfo_username}>{user.username}</span>  
         </div>
     </aside>
   )
