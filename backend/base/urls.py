@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 urlpatterns = [
     
     path("chatlist/", ChatlistView.as_view(), name="chats"),
-    path("create_chat/", CreateChatView.as_view(), name="create_chat"),
+    path("upgrade_chat/", CreateChatView.as_view(), name="create_chat"),
     path('chat/<str:pk>/', ChatView.as_view(), name='chat'),
     path('add_message/', AddMessageView.as_view(), name='add_message'),
 

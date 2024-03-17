@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import styles from './welcome.module.css'
-import Robot from '../../assets/robot.gif'
+import Developer from '../../assets/UI Developer.gif'
 import AuthContext from '../../context/AuthContext'
 
 const Welcome = () => {
@@ -8,11 +8,8 @@ const Welcome = () => {
   return (
     <section className={styles.chatbox}>
       <div className={styles.welcome_container}>
-        <img src={Robot} alt="" />
-        <h1>
-          Welcome, <span>{user.username}!</span>
-        </h1>
-        <h3>Please select a chat to Start messaging.</h3>
+        <img src={Developer} alt="" />
+        <h3 style={{marginTop: '10%'}}>Please select or create the chat to Start messaging.</h3>
       </div>
     </section>
   )

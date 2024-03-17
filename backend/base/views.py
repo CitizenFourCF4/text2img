@@ -41,7 +41,7 @@ class ChatlistView(APIView):
         'created_at': chat.created_at,
       }
     for chat in chats_belongs_to_user] 
-    return Response(output)
+    return Response(output[::-1])
   
 
 class ChatView(APIView):
@@ -71,6 +71,20 @@ class CreateChatView(APIView):
       id = new_object.id
       new_object.href = f'chat/{id}'
       new_object.save()
+      return Response({}) 
+   
+
+   def put(self,request):
+      chat_instance = Chat.objects.get(id=request.data['chat_id'])
+      chat_instance.title = request.data['new_title']
+      chat_instance.save()
+      return Response({}) 
+
+
+
+   def delete(self, request):
+      chat = Chat.objects.filter(id=request.data['chat_id'])
+      chat.delete()
       return Response({}) 
 
 
