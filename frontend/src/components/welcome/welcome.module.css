@@ -1,23 +1,24 @@
 .chatbox{
     flex: 1;
-    background-color: #212121;
     position: relative;
+}
+
+.chatbox[colorMode='dark']{
+    background-color: #212121;
 }
 
 .welcome_container{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
     flex-direction: column;
     height: 100%;
+}
+
+.welcome_container[colorMode='dark']{
+    color: white;
 }
 
 .welcome_container img {
     height: 20rem;
 }
-
-.welcome_container span {
-    color: #11d4e8;
-}
-

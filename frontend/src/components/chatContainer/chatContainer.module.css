@@ -1,8 +1,16 @@
 .chatbox{
     flex: 1;
-    background-color: #212121;
+    
     position: relative;
     height: 100%;
+}
+
+.chatbox[colorMode='dark']{
+    background-color: #212121;
+}
+
+.chatbox[colorMode='light']{
+    background-color: #fff;
 }
 
 /* ------------------ Chat input block -----------------------*/
@@ -21,12 +29,21 @@
     width: 50%;
     font-size: 1.25em;
     padding: 12px;
-    color: white;
-    box-shadow: 0 0 8px 0 rgba(239, 239, 239, 0.25);
     text-align: center;
-    border-color: hsla(0,0%,100%,.15);
     border-width: 10px;
     border-radius: 1rem;
+}
+
+.chat_input_wrapper[colorMode='dark']{
+    color: white;
+    box-shadow: 0 0 4px 0 rgba(239, 239, 239, 0.25);
+    border-color: hsla(0,0%,100%,.15);
+}
+
+.chat_input_wrapper[colorMode='light']{
+    color: black;
+    box-shadow: 0 0 4px 0 rgba(14, 13, 13, 0.966);
+    border-color: hsla(0, 21%, 10%, 0.15);
 }
 
 .chat_input_textarea{
@@ -34,11 +51,13 @@
     width: 95%;
     border-radius: 5px;
     font-size: 1.1em;
-    color: white;
     border: none;
     outline: none;
     margin-right: 30px;
-    
+}
+
+.chat_input_textarea[colorMode='dark']{
+    color: white;
 }
 
 .chat_input_button{

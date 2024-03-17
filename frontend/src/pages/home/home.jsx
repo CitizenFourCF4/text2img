@@ -8,15 +8,16 @@ import ChatContainer from '../../components/chatContainer/chatContainer'
 const HomePage = () => {
   
   const [selectedChat, setSelectedChat] = useState(undefined)
+  const [colorMode, setColorMode] = useState('dark')
   return (
-    <div className={styles.container}>
-        <Sidebar setSelectedChat={setSelectedChat}/>
+    <div className={styles.container} colorMode={colorMode}>
+        <Sidebar setSelectedChat={setSelectedChat} colorMode={colorMode} setColorMode={setColorMode}/>
           {selectedChat 
             ?(
-              <ChatContainer selectedChat={selectedChat}/>
+              <ChatContainer selectedChat={selectedChat} colorMode={colorMode}/>
              )
             :(
-              <Welcome/>
+              <Welcome colorMode={colorMode}/>
              )
           }      
     </div>
