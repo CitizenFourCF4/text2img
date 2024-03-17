@@ -30,19 +30,27 @@ ul{
 }
 
 .userInfo{
+    cursor: pointer;
     display: flex;
-    width: 100%;   
+    width: 93%;   
     justify-content: left;
     align-items: center; 
     position: absolute;
     bottom: 10px;    
     left: 10px;
+    padding-right: .5rem;
+    line-height: 45px;
+}
+
+.userInfo:hover{
+    background-color: rgba(59,55,55,0.3);
+    padding-right: .5rem;
+    border-radius: 4px;
 }
 
 .chat_list{
-    height: 85%;
     display: flex;
-    overflow-y: auto;
+    height: 80%;
 }
 
 .avatar{
@@ -60,14 +68,21 @@ ul{
     width: 100%;
     list-style: none;
     line-height: 45px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .sidebar_li{
+    display: flex;
     width: 100%;
     text-align: left;
     cursor: pointer;
     padding-right: .5rem;
     border-radius: 4px;
+    align-items: center;
 }
 
 .sidebar_li[active='active']{
@@ -80,4 +95,19 @@ ul{
 
 .title{
     padding-left: 20px;
+    margin-right: 20px;
+    width: 65%;
+    overflow-x: auto;
+}
+
+#card{
+    width: 240px;
+    z-index: 100; 
+    position: absolute;
+    top: 84%; 
+    display: flex;
+    justify-content: center;
+    margin-right: 20px;
+    background-color: #2f2f2f;
+    color: white !important;
 }

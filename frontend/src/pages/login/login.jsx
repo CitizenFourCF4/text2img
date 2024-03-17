@@ -16,29 +16,29 @@ const LoginPage = () => {
     <div className={styles.container}>
     <div className={styles.layout__box}>
       <div className={styles.layout__body}>
-        <h2 className={styles.auth__tagline}>Вход в систему</h2>
+        <h2 className={styles.auth__tagline}>Welcome back</h2>
 
         <form className={styles.form} onSubmit={loginUser}>
           <div className={styles.form__group}>
-            <label htmlFor="username" className={styles.label}>Никнейм</label>
+            <label htmlFor="username" className={styles.label}>Username</label>
             <input className={styles.input_form} id="username" name="username" type="text" ref={username}/>
           </div>
           <div className={styles.form__group}>
-            <label htmlFor="password" className={styles.label}>Пароль</label>
+            <label htmlFor="password" className={styles.label}>Password</label>
             <input className={styles.input_form} id="password" name="password" type="password"
               placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" ref={password}/>
           </div>
           <div style={{height:'55px', marginTop:"60px"}}>
             <button type="submit" className={styles.submitButton} >
-              Войти
+              Log in
             </button>
           </div>
           
         </form>
 
         <div className={styles.auth_action}>
-          <p>Еще не зарегистрированы?</p>
-          <a href="/register" style={{textDecoration:'none', color:'#3535d3'}}>Зарегистрироваться</a>
+          <p>Don't have an account?</p>
+          <a href="/register" style={{textDecoration:'none', color:'#3535d3'}}>Sign up</a>
         </div>
       </div>
     </div>

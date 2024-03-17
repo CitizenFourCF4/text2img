@@ -2,10 +2,14 @@ import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate } from "react-router-dom"
 import AuthContext from '../../context/AuthContext'
 import axios from 'axios'
-import { getChatsRoute, createChatRoute } from '../../utils/APIRoutes'
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import { getChatsRoute, upgradeChatRoute } from '../../utils/APIRoutes'
 import styles from './sidebar.module.css'
+import { BsPencil,BsXLg } from "react-icons/bs";
+import NewChatTitleModal from '../modals/newChatTitle'
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { MdLogout, MdBrightnessMedium } from "react-icons/md";
+
 
 const Sidebar = ({setSelectedChat}) => {
 
@@ -13,6 +17,12 @@ const Sidebar = ({setSelectedChat}) => {
     const [chats, setChats] = useState([])
     const navigate = useNavigate()
     const {user, authTokens, logoutUser} = useContext(AuthContext)
+    const [showSettings, setShowSettings] = useState(false)
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleModalClose = () => setShowModal(false);
+    const handleModalShow = () => setShowModal(true);
 
 
     useEffect(()=> {
@@ -42,7 +52,7 @@ const Sidebar = ({setSelectedChat}) => {
     const createChatHandler = () => {
       const data = { 'chat_title': 'New Chat', 'user_login': user.username, }
       const options = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + String(authTokens.access) }
-      axios.post(createChatRoute, data, options)
+      axios.post(upgradeChatRoute, data, options)
       .then(function (response) {
         getChats()
       })
@@ -50,6 +60,20 @@ const Sidebar = ({setSelectedChat}) => {
       })
     }
 
+
+    const chatDeleteHandler = (chat_id) => {
+      const data = {'chat_id': chat_id }
+      axios.delete(upgradeChatRoute, { data: data })
+      .then(function (response) {
+        getChats()
+          /* TODO: FIX BUG*/
+        if(chats.length === 1){ /* На самом деле chats.length === 0 */
+          setSelectedChat(undefined)
+        }
+      })
+      .catch(function (error) {
+      })
+    }
 
   return (
     <aside className={styles.sidemenu}>
@@ -60,21 +84,34 @@ const Sidebar = ({setSelectedChat}) => {
         <div className={styles.chat_list}>
           <ul className={styles.sidebar_ul}>
             {chats && chats.map((chat, index) => (
-              <li className={styles.sidebar_li} key={index} onClick={() => changeCurrentChat(chat.id)} active={currentSelected ===chat.id ? 'active' : ''}>
+              <li data-bs-theme="dark" className={styles.sidebar_li} key={index} onClick={() => changeCurrentChat(chat.id)} active={currentSelected ===chat.id ? 'active' : ''}>
                 <div className={styles.title}>
                   {chat.title}
                 </div>
-                  
+                {currentSelected ===chat.id && 
+                <div>
+                  <BsPencil onClick={handleModalShow} style={{'marginRight': '20px'}}/>     
+                  <BsXLg onClick={() => chatDeleteHandler(chat.id)}/>
+                </div>  }       
               </li>
               ))} 
           </ul>
         </div>
+        {showSettings && 
+        <Card id={styles.card}>
+          <ListGroup className="list-group-flush" style={{textAlign: 'left'}}>
+            <ListGroup.Item style={{background: 'transparent', 'color': 'white', cursor:'pointer'}}><MdBrightnessMedium /> Change color theme</ListGroup.Item>
+            <ListGroup.Item style={{background: 'transparent', 'color': 'white', cursor:'pointer'}} onClick={logoutUser}><MdLogout /> Log out</ListGroup.Item>
+          </ListGroup>
+        </Card>}
 
-        <div className={styles.userInfo}>
+        <div className={styles.userInfo} onClick={() => setShowSettings(!showSettings)}>
           <div className={styles.avatar}>{user.username[0]}</div>
           <span className={styles.userInfo_username}>{user.username}</span>  
         </div>
+        <NewChatTitleModal showModal={showModal} onHide={handleModalClose} currentSelected={currentSelected} getChats={getChats}/>
     </aside>
+    
   )
 }
 

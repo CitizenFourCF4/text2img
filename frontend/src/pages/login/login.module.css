@@ -2,8 +2,7 @@
     max-width: 120rem;
     width: 90%;
     margin: auto;
-    color: #ffffff;
-    font-size: 20px;
+    color: #000;
   }
   
 .layout__box {
@@ -13,8 +12,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -46%);
-  background: linear-gradient(to right, #0e092ff7, #282633, #1c1c97);
-  border-radius: 1rem;
+  background: #ffffff;
+  border-radius: 6px;
   box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -68,19 +67,19 @@ input, label{
 }
 
 .submitButton{
+  margin-left: 5%;
   width: 90%; 
   cursor: pointer;
   height: 100%;
   border-radius: 8px;
-  background: linear-gradient(to right, #131312, #f2200c66, #151518);
+  background: #10a37f;
   color: #ffffff;
   transition: 0.5s;
-  border-color: brown;
-  margin-left: 5%;
+  border-color: rgb(22, 148, 22);
 }
 
 .submitButton:hover{
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 .label{

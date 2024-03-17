@@ -39,9 +39,9 @@ const RegisterPage = () => {
     <div className={styles.container}>
       <div className={styles.layout__box}>
         <div className={styles.layout__body}>
-          <h2 className={styles.auth__tagline}>Регистрация</h2>
+          <h2 className={styles.auth__tagline}>Create your account</h2>
           <Form noValidate isValidated={isValidated}>
-            <Form.Group controlId="username">
+            <Form.Group controlId="username" style={{marginBottom:'1rem'}}>
               <Form.Label>Username</Form.Label>
               <Form.Control 
                 type="text" name="username" value={formData.username} onChange={changeHandler} pattern="^[a-zA-Z0-9_]+$" 
@@ -52,7 +52,7 @@ const RegisterPage = () => {
                   characters only).
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group controlId="password">
+            <Form.Group controlId="password" style={{marginBottom:'1rem'}}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type="password"
@@ -69,7 +69,7 @@ const RegisterPage = () => {
                     Password must be at least 6 characters long.
                 </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group controlId="confirmPassword">
+            <Form.Group controlId="confirmPassword" style={{marginBottom:'1rem'}}>
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                     type="password"
@@ -107,13 +107,13 @@ const RegisterPage = () => {
             </Form.Group>
             <div style={{height:'55px', marginTop:"60px"}}>
               <button type="submit" className={styles.submitButton} onClick={submitHandler}>
-                Зарегистрироваться
+                Sign up
               </button>
             </div>
           </Form>
           <div className={styles.auth_action}>
-            <p>Уже зарегистрированы?</p>
-            <a href="/login" style={{textDecoration:'none', color:'#3535d3'}}>Вход</a>
+            <p>Do you have an account?</p>
+            <a href="/login" style={{textDecoration:'none', color:'#3535d3'}}>Log in</a>
           </div>
         </div>
       </div>
