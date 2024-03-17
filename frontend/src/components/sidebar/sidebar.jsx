@@ -11,7 +11,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { MdLogout, MdBrightnessMedium } from "react-icons/md";
 
 
-const Sidebar = ({setSelectedChat}) => {
+const Sidebar = ({setSelectedChat, colorMode, setColorMode}) => {
 
     const [currentSelected, setCurrentSelected] = useState(undefined)
     const [chats, setChats] = useState([])
@@ -76,15 +76,15 @@ const Sidebar = ({setSelectedChat}) => {
     }
 
   return (
-    <aside className={styles.sidemenu}>
-        <div className={styles.side_menu_button} onClick={createChatHandler}>
+    <aside className={styles.sidemenu} colorMode={colorMode}>
+        <div className={styles.side_menu_button} onClick={createChatHandler} colorMode={colorMode}>
             <span>+</span>
             New Chat
         </div>
         <div className={styles.chat_list}>
           <ul className={styles.sidebar_ul}>
             {chats && chats.map((chat, index) => (
-              <li data-bs-theme="dark" className={styles.sidebar_li} key={index} onClick={() => changeCurrentChat(chat.id)} active={currentSelected ===chat.id ? 'active' : ''}>
+              <li data-bs-theme="dark" colorMode={colorMode} className={styles.sidebar_li} key={index} onClick={() => changeCurrentChat(chat.id)} active={currentSelected ===chat.id ? 'active' : ''}>
                 <div className={styles.title}>
                   {chat.title}
                 </div>
@@ -98,14 +98,14 @@ const Sidebar = ({setSelectedChat}) => {
           </ul>
         </div>
         {showSettings && 
-        <Card id={styles.card}>
+        <Card id={styles.card} colorMode={colorMode}>
           <ListGroup className="list-group-flush" style={{textAlign: 'left'}}>
-            <ListGroup.Item style={{background: 'transparent', 'color': 'white', cursor:'pointer'}}><MdBrightnessMedium /> Change color theme</ListGroup.Item>
-            <ListGroup.Item style={{background: 'transparent', 'color': 'white', cursor:'pointer'}} onClick={logoutUser}><MdLogout /> Log out</ListGroup.Item>
+            <ListGroup.Item colorMode={colorMode} id={styles.listItem} onClick={colorMode==='dark' ? () => setColorMode('light') : () => setColorMode('dark')}><MdBrightnessMedium/> Change color theme</ListGroup.Item>
+            <ListGroup.Item colorMode={colorMode} id={styles.listItem} onClick={logoutUser}><MdLogout /> Log out</ListGroup.Item>
           </ListGroup>
         </Card>}
 
-        <div className={styles.userInfo} onClick={() => setShowSettings(!showSettings)}>
+        <div className={styles.userInfo} onClick={() => setShowSettings(!showSettings)} colorMode={colorMode}>
           <div className={styles.avatar}>{user.username[0]}</div>
           <span className={styles.userInfo_username}>{user.username}</span>  
         </div>

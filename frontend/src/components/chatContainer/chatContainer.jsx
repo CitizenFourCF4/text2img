@@ -5,7 +5,7 @@ import { getMessagesRoute,  addMessageRoute} from '../../utils/APIRoutes'
 import AuthContext from '../../context/AuthContext'
 import { AiOutlineSend } from "react-icons/ai"
 
-const ChatContainer = ({selectedChat}) => {
+const ChatContainer = ({selectedChat, colorMode}) => {
 
   const [messages, setMessages] = useState([])
   const {user, authTokens, logoutUser} = useContext(AuthContext)
@@ -45,7 +45,7 @@ const ChatContainer = ({selectedChat}) => {
 
 
   return (
-    <section className={styles.chatbox}>
+    <section className={styles.chatbox} colorMode={colorMode}>
       <div className={styles.chat_messages_holder}>
         <div className={styles.chat_messages_wrapper}>
           {messages && messages.map((msg, index) => (
@@ -64,8 +64,8 @@ const ChatContainer = ({selectedChat}) => {
 
           <form method='POST' onSubmit={sendMessageHandler}>
             <div className={styles.chat_input_holder}>
-              <div className={styles.chat_input_wrapper}>
-                <input placeholder='Type message...' className={styles.chat_input_textarea} onChange={e => setInputMessage(e.target.value)} value={inputMessage}/>
+              <div className={styles.chat_input_wrapper} colorMode={colorMode}>
+                <input placeholder='Type message...' className={styles.chat_input_textarea} onChange={e => setInputMessage(e.target.value)} value={inputMessage} colorMode={colorMode}/>
                 <button className={styles.chat_input_button}>
                   <AiOutlineSend size={25}/>
                 </button>
