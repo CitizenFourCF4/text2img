@@ -22,7 +22,10 @@ const Sidebar = ({setSelectedChat, colorMode, setColorMode}) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleModalClose = () => setShowModal(false);
-    const handleModalShow = () => setShowModal(true);
+    const handleModalShow = () => {
+      console.log(123)
+      setShowModal(true);
+    }
 
 
     useEffect(()=> {
@@ -109,7 +112,7 @@ const Sidebar = ({setSelectedChat, colorMode, setColorMode}) => {
           <div className={styles.avatar}>{user.username[0]}</div>
           <span className={styles.userInfo_username}>{user.username}</span>  
         </div>
-        <NewChatTitleModal showModal={showModal} onHide={handleModalClose} currentSelected={currentSelected} getChats={getChats}/>
+        <NewChatTitleModal show={showModal} onHide={handleModalClose} currentSelected={currentSelected} getChats={getChats}/>
     </aside>
     
   )
