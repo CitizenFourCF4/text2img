@@ -78,7 +78,6 @@
     right: 0;
     height: 85%;
     display: flex;
-    justify-content: center;
     overflow-y: auto;
     max-height: 85%;
 }
@@ -87,7 +86,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    padding: 12px;
+    padding-top: 12px;
 }
 
 .message_wrapper{
@@ -113,6 +112,27 @@
     font-weight: 600;
     font-size: 18px;
 }
+
 .message{
     word-wrap: break-word;
+}
+
+#dropdown_toggle{
+    border: 0;
+    font-size: 20px;
+}
+
+#dropdown_toggle[colorMode='light']{
+    background-color: white;
+    color: black;
+}
+
+#dropdown_toggle[colorMode='dark']{
+    background-color: #212121;
+    color: white;
+}
+
+#dropdown_toggle:focus{
+    border: none;
+    box-shadow: none;
 }

@@ -4,12 +4,14 @@ import styles from './chatContainer.module.css'
 import { getMessagesRoute,  addMessageRoute} from '../../utils/APIRoutes'
 import AuthContext from '../../context/AuthContext'
 import { AiOutlineSend } from "react-icons/ai"
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const ChatContainer = ({selectedChat, colorMode}) => {
 
   const [messages, setMessages] = useState([])
   const {user, authTokens, logoutUser} = useContext(AuthContext)
   const [inputMessage, setInputMessage] = useState('')
+  const [modelMode, setModelMode] = useState('Translation')
 
 
   useEffect(()=> {
@@ -47,6 +49,16 @@ const ChatContainer = ({selectedChat, colorMode}) => {
   return (
     <section className={styles.chatbox} colorMode={colorMode}>
       <div className={styles.chat_messages_holder}>
+      <Dropdown style={{width: '25%', textAlign:'left'}}>
+      <Dropdown.Toggle colorMode={colorMode} id={styles.dropdown_toggle}>
+        {modelMode}
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => setModelMode('Translation')}>Translation</Dropdown.Item>
+        <Dropdown.Item onClick={() => setModelMode('Text 2 Img')}>Text 2 Img</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
         <div className={styles.chat_messages_wrapper}>
           {messages && messages.map((msg, index) => (
             <div className={styles.message_wrapper} key={index} author={msg.author}>
