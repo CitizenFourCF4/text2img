@@ -5,6 +5,7 @@ import { getMessagesRoute,  addMessageRoute} from '../../utils/APIRoutes'
 import AuthContext from '../../context/AuthContext'
 import { AiOutlineSend } from "react-icons/ai"
 import Dropdown from 'react-bootstrap/Dropdown';
+import {ReactTyped} from "react-typed";
 
 const ChatContainer = ({selectedChat, colorMode}) => {
 
@@ -12,6 +13,7 @@ const ChatContainer = ({selectedChat, colorMode}) => {
   const {user, authTokens, logoutUser} = useContext(AuthContext)
   const [inputMessage, setInputMessage] = useState('')
   const [modelMode, setModelMode] = useState('Translation')
+  const [currentIndex, setCurrentIndex] = useState(0);
 
 
   useEffect(()=> {
@@ -34,6 +36,11 @@ const ChatContainer = ({selectedChat, colorMode}) => {
     e.preventDefault()
     const data = { 'chat_id': selectedChat, 'message': inputMessage, 'author': user.username }
     const options = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + String(authTokens.access) }
+    setInputMessage('')
+    setMessages([...messages, {
+      'message': inputMessage, 
+      'author': user.username
+    }])
     const responce = await axios.post(addMessageRoute, data, options)
     .then(function(){
       setInputMessage('')
@@ -66,7 +73,8 @@ const ChatContainer = ({selectedChat, colorMode}) => {
               <div className={styles.text_wrapper}>
                 <div className={styles.author}>{msg.author === 'chat' ? msg.author : 'You'}</div>
                 <div className={styles.message}>
-                  {msg.message}
+                  {((index === messages.length-1) & msg.author === 'chat') ? <ReactTyped strings={[msg.message]} typeSpeed={50} showCursor={false}/> : <div>{msg.message}</div>}
+                  
                 </div>
               </div>  
             </div>
