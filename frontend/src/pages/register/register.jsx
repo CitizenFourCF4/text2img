@@ -7,6 +7,7 @@ import {Form} from "react-bootstrap";
 
 
 const RegisterPage = () => {
+  const navigate = useNavigate()
   const [isValidated, setIsValidated] = useState(false);
   const [formData, setFormData] = useState({
       username: "",
@@ -26,6 +27,13 @@ const RegisterPage = () => {
         password: formData.password,
         email: formData.email,
       })
+      .then(function (response) {
+        navigate('/login')
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
   };
   const changeHandler = (event) => {
       const { name, value } = event.target;

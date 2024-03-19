@@ -19,12 +19,9 @@ def user_register_view(request):
     if serializer.is_valid():
         try:
             account = serializer.save()
-            refresh = RefreshToken.for_user(account)
+            RefreshToken.for_user(account)
             return Response({'status': 'Account has been created successfully',
-                             'token': {
-                                 'refresh': str(refresh),
-                                 'access': str(refresh.access_token)
-                             }}, status=200)
+                             }, status=200)
         except Exception as e:
             return Response(e, status=400)
         
