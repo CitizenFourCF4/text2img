@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from .serializers import UserRegisterSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from .ru_en_translate import translate
 
 
     
@@ -97,6 +98,14 @@ class AddMessageView(APIView):
             chat = chat,
             message = request.data['message']
         )
+
+        translation_text = translate(request.data['message'])
+        Message.objects.create(
+            user = User.objects.get(username='chat'),
+            chat = chat,
+            message = translation_text
+        )
+
         return Response({})
 
 
