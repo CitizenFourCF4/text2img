@@ -33,11 +33,13 @@ const NewChatTitleModal = (props) => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" data-bs-theme="dark">
             <Form.Label data-bs-theme="dark">New Title</Form.Label>
             <Form.Control
+              type="text"
               onChange={e => setInputTitle(e.target.value)}
-              type="email"
+              onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
               placeholder="Type here..."
               autoFocus
               data-bs-theme="dark"
+              required
             />
           </Form.Group>
         </Form>
