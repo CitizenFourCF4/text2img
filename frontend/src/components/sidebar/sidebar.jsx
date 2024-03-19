@@ -103,7 +103,7 @@ const Sidebar = ({setSelectedChat, colorMode, setColorMode}) => {
         {showSettings && 
         <Card id={styles.card} colorMode={colorMode}>
           <ListGroup className="list-group-flush" style={{textAlign: 'left'}}>
-            <ListGroup.Item colorMode={colorMode} id={styles.listItem} onClick={colorMode==='dark' ? () => setColorMode('light') : () => setColorMode('dark')}><MdBrightnessMedium/> Change color theme</ListGroup.Item>
+            <ListGroup.Item colorMode={colorMode} id={styles.listItem} onClick={colorMode==='dark' ? () => {setColorMode('light'); setShowSettings(false)} : () => {setColorMode('dark'); setShowSettings(false)}}><MdBrightnessMedium/> Change color theme</ListGroup.Item>
             <ListGroup.Item colorMode={colorMode} id={styles.listItem} onClick={logoutUser}><MdLogout /> Log out</ListGroup.Item>
           </ListGroup>
         </Card>}

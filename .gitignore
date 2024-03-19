@@ -1,4 +1,4 @@
 .env
-node_modules
-__pycache__
-migrations
+*/__pycache__/
+backend/backend/__pycache__/
+*/migrations/
