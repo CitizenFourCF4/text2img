@@ -1,4 +1,4 @@
 .env
-*/__pycache__/
+*/__pycache__/*
 backend/backend/__pycache__/
 */migrations/
